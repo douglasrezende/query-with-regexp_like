@@ -1,0 +1,8 @@
+select msg.created_datetime,msg.message_name, mbx.path
+from mbx_message msg inner join mbx_mailbox mbx on
+mbx.MAILBOX_ID = msg.MAILBOX_ID
+where mbx.path like '%/TEF_RE%'
+and msg.CREATED_DATETIME between to_date('2022-03-01 00:00:00','YYYY-MM-DD HH24:MI:SS')
+and to_date('2022-03-31 23:59:59','YYYY-MM-DD HH24:MI:SS')
+and regexp_like(msg.message_name,'^(ASLC023|ASLC025|ASLC033|ASLC041|ASLC042|ASLC043)')
+order by msg.created_datetime
